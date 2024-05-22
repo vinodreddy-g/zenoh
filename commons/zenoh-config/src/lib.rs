@@ -444,6 +444,10 @@ validated_struct::validator! {
                 UnixPipeConf {
                     file_access_mask: Option<u32>
                 },
+                pub custom: #[derive(Default)]
+                CustomConf {
+                    file_access_mask: Option<u32>
+                },
             },
             pub shared_memory:
             SharedMemoryConf {

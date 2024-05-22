@@ -53,6 +53,14 @@ pub use zenoh_link_unixpipe as unixpipe;
 use zenoh_link_unixpipe::{
     LinkManagerUnicastPipe, UnixPipeConfigurator, UnixPipeLocatorInspector, UNIXPIPE_LOCATOR_PREFIX,
 };
+
+#[cfg(feature = "transport_custom")]
+pub use zenoh_link_custom as custom;
+#[cfg(feature = "transport_custom")]
+use zenoh_link_custom::{
+    LinkManagerCustom, CustomConfigurator, CustomLocatorInspector, CUSTOM_LOCATOR_PREFIX,
+};
+
 #[cfg(all(feature = "transport_unixsock-stream", target_family = "unix"))]
 pub use zenoh_link_unixsock_stream as unixsock_stream;
 #[cfg(all(feature = "transport_unixsock-stream", target_family = "unix"))]
@@ -88,6 +96,8 @@ pub const PROTOCOLS: &[&str] = &[
     serial::SERIAL_LOCATOR_PREFIX,
     #[cfg(feature = "transport_unixpipe")]
     unixpipe::UNIXPIPE_LOCATOR_PREFIX,
+    #[cfg(feature = "transport_custom")]
+    custom::CUSTOM_LOCATOR_PREFIX,
     #[cfg(all(feature = "transport_vsock", target_os = "linux"))]
     vsock::VSOCK_LOCATOR_PREFIX,
 ];
@@ -110,6 +120,8 @@ pub struct LocatorInspector {
     serial_inspector: SerialLocatorInspector,
     #[cfg(feature = "transport_unixpipe")]
     unixpipe_inspector: UnixPipeLocatorInspector,
+    #[cfg(feature = "transport_custom")]
+    custom_inspector: CustomLocatorInspector,
     #[cfg(all(feature = "transport_vsock", target_os = "linux"))]
     vsock_inspector: VsockLocatorInspector,
 }
@@ -137,6 +149,8 @@ impl LocatorInspector {
             SERIAL_LOCATOR_PREFIX => self.serial_inspector.is_multicast(locator).await,
             #[cfg(feature = "transport_unixpipe")]
             UNIXPIPE_LOCATOR_PREFIX => self.unixpipe_inspector.is_multicast(locator).await,
+            #[cfg(feature = "transport_custom")]
+            CUSTOM_LOCATOR_PREFIX => self.custom_inspector.is_multicast(locator).await,
             #[cfg(all(feature = "transport_vsock", target_os = "linux"))]
             VSOCK_LOCATOR_PREFIX => self.vsock_inspector.is_multicast(locator).await,
             _ => bail!("Unsupported protocol: {}.", protocol),
@@ -151,6 +165,8 @@ pub struct LinkConfigurator {
     tls_inspector: TlsConfigurator,
     #[cfg(feature = "transport_unixpipe")]
     unixpipe_inspector: UnixPipeConfigurator,
+    #[cfg(feature = "transport_custom")]
+    custom_inspector: CustomConfigurator,
 }
 
 impl LinkConfigurator {
@@ -193,6 +209,13 @@ impl LinkConfigurator {
                 self.unixpipe_inspector.inspect_config(config),
             );
         }
+        #[cfg(feature = "transport_custom")]
+        {
+            insert_config(
+                CUSTOM_LOCATOR_PREFIX.into(),
+                self.custom_inspector.inspect_config(config),
+            );
+        }
         (configs, errors)
     }
 }
@@ -228,6 +251,12 @@ impl LinkManagerBuilderUnicast {
             UNIXPIPE_LOCATOR_PREFIX => {
                 Ok(std::sync::Arc::new(LinkManagerUnicastPipe::new(_manager)))
             }
+
+            #[cfg(feature = "transport_custom")]
+            CUSTOM_LOCATOR_PREFIX => {
+                Ok(std::sync::Arc::new(LinkManagerCustom::new(_manager)))
+            }
+
             #[cfg(all(feature = "transport_vsock", target_os = "linux"))]
             VSOCK_LOCATOR_PREFIX => Ok(std::sync::Arc::new(LinkManagerUnicastVsock::new(_manager))),
             _ => bail!("Unicast not supported for {} protocol", protocol),

@@ -30,6 +30,7 @@ publish = false
 shared-memory = ["zenoh/shared-memory"]
 unstable = ["zenoh/unstable"]
 transport_unixpipe = ["zenoh/transport_unixpipe"]
+transport_custom = ["zenoh/transport_custom"]
 
 [dependencies]
 tokio = { workspace = true, features = ["rt-multi-thread", "time", "io-std"] }

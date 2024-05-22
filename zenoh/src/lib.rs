@@ -100,6 +100,7 @@ pub const FEATURES: &str = zenoh_util::concat_enabled_features!(
         "transport_quic",
         "transport_serial",
         "transport_unixpipe",
+        "transport_custom",
         "transport_tcp",
         "transport_tls",
         "transport_udp",

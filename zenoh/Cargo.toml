@@ -44,6 +44,7 @@ transport_compression = ["zenoh-transport/transport_compression"]
 transport_quic = ["zenoh-transport/transport_quic"]
 transport_serial = ["zenoh-transport/transport_serial"]
 transport_unixpipe = ["zenoh-transport/transport_unixpipe"]
+transport_custom = ["zenoh-transport/transport_custom"]
 transport_tcp = ["zenoh-transport/transport_tcp"]
 transport_tls = ["zenoh-transport/transport_tls"]
 transport_udp = ["zenoh-transport/transport_udp"]
@@ -60,6 +61,7 @@ default = [
     "transport_tcp",
     "transport_tls",
     "transport_udp",
+    "transport_custom",
     "transport_unixsock-stream",
     "transport_ws",
 ]
