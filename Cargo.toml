@@ -199,12 +199,13 @@ zenoh_backend_traits = { version = "0.11.0-dev", path = "plugins/zenoh-backend-t
 zenoh-transport = { version = "0.11.0-dev", path = "io/zenoh-transport", default-features = false }
 zenoh-link-tls = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-tls" }
 zenoh-link-tcp = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-tcp" }
+zenoh-link-custom = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-custom" }
 zenoh-link-unixsock_stream = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-unixsock_stream" }
 zenoh-link-quic = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-quic" }
 zenoh-link-udp = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-udp" }
 zenoh-link-ws = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-ws" }
 zenoh-link-unixpipe = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-unixpipe" }
-zenoh-link-custom = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-custom" }
+
 zenoh-link-serial = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-serial" }
 zenoh-link-vsock = { version = "0.11.0-dev", path = "io/zenoh-links/zenoh-link-vsock" }
 zenoh-link = { version = "0.11.0-dev", path = "io/zenoh-link" }

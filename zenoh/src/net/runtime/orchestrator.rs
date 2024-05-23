@@ -43,8 +43,11 @@ const RCV_BUF_SIZE: usize = u16::MAX as usize;
 const SCOUT_INITIAL_PERIOD: Duration = Duration::from_millis(1_000);
 const SCOUT_MAX_PERIOD: Duration = Duration::from_millis(8_000);
 const SCOUT_PERIOD_INCREASE_FACTOR: u32 = 2;
-const ROUTER_DEFAULT_LISTENER: &str = "tcp/[::]:7447";
-const PEER_DEFAULT_LISTENER: &str = "tcp/[::]:0";
+// const ROUTER_DEFAULT_LISTENER: &str = "tcp/[::]:7447";
+// const PEER_DEFAULT_LISTENER: &str = "tcp/[::]:0";
+const ROUTER_DEFAULT_LISTENER: &str = "custom/[::]:7447";
+const PEER_DEFAULT_LISTENER: &str = "custom/[::]:0";
+
 
 pub enum Loop {
     Continue,

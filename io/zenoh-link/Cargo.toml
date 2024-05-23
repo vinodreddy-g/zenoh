@@ -33,7 +33,7 @@ transport_unixsock-stream = ["zenoh-link-unixsock_stream"]
 transport_ws = ["zenoh-link-ws"]
 transport_serial = ["zenoh-link-serial"]
 transport_unixpipe = ["zenoh-link-unixpipe", "zenoh-link-unixpipe/transport_unixpipe"]
-transport_custom = ["zenoh-link-custom", "zenoh-link-custom/transport_custom"]
+transport_custom = ["zenoh-link-custom"]
 transport_vsock = ["zenoh-link-vsock"]
 
 [dependencies]
